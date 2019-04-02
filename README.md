@@ -14,6 +14,7 @@ This project has just started (April 2019) and it is still under development :) 
 | ANY | /  | home  | Display the home page  |
 | ANY | /course  | showCourse  | Display a specific course  |
 | POST | /course/create  | createCourse  | Create a new course  |
+| ANY	| /static/ | http.FileServer | Serve a specific static file
 
 ## Project structure
 
@@ -26,3 +27,5 @@ The *pkg* contains the ancillary non-application-specific and reusable code like
 
 ### ui
 The *ui* folder conatins user-interface assets like HTML templates, static (CSS) files etc.
+
+Templates are named based on the following pattern: `<name>.<role>.tmpl`  where `<role>` is either *page*, *partial* or *master* (the layout).
