@@ -3,15 +3,14 @@ package main
 import (
 	"fmt"
 	"html/template"
-	"log"
 	"net/http"
 	"strconv"
 )
 
 // Define a home handler function which writes a byte slice containing response body
-func home(w http.ResponseWriter, r *http.Request) {
+func (app *application) home(w http.ResponseWriter, r *http.Request) {
 	if r.URL.Path != "/" {
-		http.NotFound(w, r)
+		app.notFound(w)
 		return
 	}
 
@@ -25,8 +24,7 @@ func home(w http.ResponseWriter, r *http.Request) {
 	// Read a template file into a template set
 	ts, err := template.ParseFiles(files...)
 	if err != nil {
-		log.Println(err.Error())
-		http.Error(w, "Internal Server Error", 500)
+		app.serverError(w, err)
 		return
 	}
 
@@ -34,16 +32,15 @@ func home(w http.ResponseWriter, r *http.Request) {
 	// for now.
 	err = ts.Execute(w, nil)
 	if err != nil {
-		log.Println(err.Error())
-		http.Error(w, "Internal Server Error", 500)
+		app.serverError(w, err)
 	}
 }
 
 // Displays a particular course based on its ID
-func showCourse(w http.ResponseWriter, r *http.Request) {
+func (app *application) showCourse(w http.ResponseWriter, r *http.Request) {
 	id, err := strconv.Atoi(r.URL.Query().Get("id"))
 	if err != nil || id < 1 {
-		http.NotFound(w, r)
+		app.notFound(w)
 		return
 	}
 
@@ -51,10 +48,10 @@ func showCourse(w http.ResponseWriter, r *http.Request) {
 }
 
 // Creates a new course
-func createCourse(w http.ResponseWriter, r *http.Request) {
+func (app *application) createCourse(w http.ResponseWriter, r *http.Request) {
 	if r.Method != "POST" {
 		w.Header().Set("Allow", "POST")
-		http.Error(w, "Method not allowed", 405)
+		app.clientError(w, http.StatusMethodNotAllowed)
 		return
 	}
 
