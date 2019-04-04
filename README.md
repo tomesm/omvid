@@ -29,3 +29,6 @@ The *pkg* contains the ancillary non-application-specific and reusable code like
 The *ui* folder conatins user-interface assets like HTML templates, static (CSS) files etc.
 
 Templates are named based on the following pattern: `<name>.<role>.tmpl`  where `<role>` is either *page*, *partial* or *master* (the layout).
+
+## Database
+The project is using MySQL. In the future it is planned to migrate to Postgres.
