@@ -1,4 +1,4 @@
-module github.com/tomesm/omvid
+module github.com/tomesm/virtd
 
 require (
 	github.com/OpenPeeDeeP/depguard v0.0.0-20181229194401-1f388ab2d810 // indirect
@@ -15,6 +15,7 @@ require (
 	github.com/go-critic/go-critic v0.3.4 // indirect
 	github.com/go-delve/delve v1.2.0 // indirect
 	github.com/go-ole/go-ole v1.2.4 // indirect
+	github.com/go-sql-driver/mysql v1.4.1
 	github.com/go-toolsmith/astcast v1.0.0 // indirect
 	github.com/go-toolsmith/astcopy v1.0.0 // indirect
 	github.com/go-toolsmith/astfmt v1.0.0 // indirect
