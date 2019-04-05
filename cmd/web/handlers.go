@@ -55,5 +55,16 @@ func (app *application) createCourse(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	w.Write([]byte("Create a new course..."))
+	// Dummy data
+	title := "Linear algebra"
+	content := "Advanced linear algebra course for computer science"
+	expires := "7"
+
+	id, err := app.courses.Insert(title, content, expires)
+	if err != nil {
+		app.serverError(w, err)
+	}
+
+	// Redirect the user to the newly created course record
+	http.Redirect(w, r, fmt.Sprintf("/course?id=%d", id), http.StatusSeeOther)
 }
