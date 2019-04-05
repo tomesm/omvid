@@ -14,6 +14,12 @@ func (app *application) home(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	var err error
+	defer func() {
+		if err != nil {
+			app.serverError(w, err)
+		}
+	}()
 	// Initialize template paths. Home must be the *first in the slice
 	files := []string{
 		"./ui/html/home.page.tmpl",
@@ -24,7 +30,6 @@ func (app *application) home(w http.ResponseWriter, r *http.Request) {
 	// Read a template file into a template set
 	ts, err := template.ParseFiles(files...)
 	if err != nil {
-		app.serverError(w, err)
 		return
 	}
 
@@ -32,7 +37,7 @@ func (app *application) home(w http.ResponseWriter, r *http.Request) {
 	// for now.
 	err = ts.Execute(w, nil)
 	if err != nil {
-		app.serverError(w, err)
+		return
 	}
 }
 

@@ -13,17 +13,24 @@ type CourseModel struct {
 
 // Insert a course into the database and return its ID
 func (m *CourseModel) Insert(title, content, expires string) (int, error) {
+	var err error
+	defer func() {
+		if err != nil {
+			return 0, err
+		}
+	}()
+
 	statement := `INSERT INTO courses (title, content, created, expires)
 	VALUES(?, ?, UTC_TIMESTAMP(), DATE_ADD(UTC_TIMESTAMP(), INTERVAL ? DAY))`
 
 	res, err := m.DB.Exec(statement, title, content, expires)
 	if err != nil {
-		return 0, err
+		return
 	}
 
 	id, err := res.LastInsertId()
 	if err != nil {
-		return 0, err
+		return
 	}
 
 	return int(id), nil
