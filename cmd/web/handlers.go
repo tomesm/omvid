@@ -5,6 +5,8 @@ import (
 	"html/template"
 	"net/http"
 	"strconv"
+
+	"github.com/tomesm/virtd/pkg/models"
 )
 
 // Define a home handler function which writes a byte slice containing response body
@@ -49,7 +51,16 @@ func (app *application) showCourse(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	fmt.Fprintf(w, "Display a specific course with ID %d...", id)
+	s, err := app.courses.Get(id)
+	if err == models.ErrNoRecord {
+		app.notFound(w)
+		return
+	} else if err != nil {
+		app.serverError(w, err)
+		return
+	}
+
+	fmt.Fprintf(w, "%v", s)
 }
 
 // Creates a new course
