@@ -49,5 +49,33 @@ func (m *CourseModel) Get(id int) (*models.Course, error) {
 
 // Latest 10 latest
 func (m *CourseModel) Latest() ([]*models.Course, error) {
-	return nil, nil
+	statement := `SELECT id, title, content, created, expires FROM courses
+	WHERE expires > UTC_TIMESTAMP() ORDER BY created DESC LIMIT 10`
+
+	rows, err := m.DB.Query(statement)
+	if err != nil {
+		return nil, err
+	}
+
+	defer rows.Close()
+
+	courses := []*models.Course{}
+
+	for rows.Next() {
+		c := &models.Course{}
+
+		err = rows.Scan(&c.ID, &c.Title, &c.Content, &c.Created, &c.Expires)
+		if err != nil {
+			return nil, err
+		}
+
+		courses = append(courses, c)
+	}
+
+	// We can not assume that the iteration was successful!
+	if err = rows.Err(); err != nil {
+		return nil, err
+	}
+
+	return courses, nil
 }

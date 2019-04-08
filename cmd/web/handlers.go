@@ -5,6 +5,7 @@ import (
 	"html/template"
 	"net/http"
 	"strconv"
+	"text/template"
 
 	"github.com/tomesm/virtd/pkg/models"
 )
