@@ -46,7 +46,7 @@ func (app *application) showCourse(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	s, err := app.courses.Get(id)
+	c, err := app.courses.Get(id)
 	if err == models.ErrNoRecord {
 		app.notFound(w)
 		return
@@ -55,7 +55,21 @@ func (app *application) showCourse(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	fmt.Fprintf(w, "%v", s)
+	files := []string{
+		"./ui/html/show.page.tmpl",
+		"./ui/html/base.master.tmpl",
+		"./ui/html/footer.partial.tmpl",
+	}
+
+	ts, err := template.ParseFiles(files...)
+	if err != nil {
+		app.serverError(w, err)
+		return
+	}
+
+	if err := ts.Execute(w, s); err != nil {
+		app.serverError(w, err)
+	}
 }
 
 // Creates a new course
