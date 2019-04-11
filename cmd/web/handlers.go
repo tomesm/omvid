@@ -5,7 +5,6 @@ import (
 	"html/template"
 	"net/http"
 	"strconv"
-	"text/template"
 
 	"github.com/tomesm/virtd/pkg/models"
 )
@@ -67,7 +66,7 @@ func (app *application) showCourse(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	if err := ts.Execute(w, s); err != nil {
+	if err := ts.Execute(w, c); err != nil {
 		app.serverError(w, err)
 	}
 }
