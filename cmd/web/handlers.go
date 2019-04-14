@@ -16,25 +16,14 @@ func (app *application) home(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// Initialize template paths. Home must be the *first in the slice
-	files := []string{
-		"./ui/html/home.page.tmpl",
-		"./ui/html/base.master.tmpl",
-		"./ui/html/footer.partial.tmpl",
-	}
-
-	// Read a template file into a template set
-	ts, err := template.ParseFiles(files...)
+	c, err := app.courses.Latest()
 	if err != nil {
 		app.serverError(w, err)
 	}
 
-	// Execute template set to write the template content as the response body. Dynamic data is nil
-	// for now.
-	err = ts.Execute(w, nil)
-	if err != nil {
-		app.serverError(w, err)
-	}
+	td := &templateData{Courses: c}
+
+	app.render(w, r, "home.page.tmpl", td)
 }
 
 // Displays a particular course based on its ID
@@ -54,6 +43,8 @@ func (app *application) showCourse(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	data := &templateData{Course: c}
+
 	files := []string{
 		"./ui/html/show.page.tmpl",
 		"./ui/html/base.master.tmpl",
@@ -66,7 +57,7 @@ func (app *application) showCourse(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	if err := ts.Execute(w, c); err != nil {
+	if err := ts.Execute(w, data); err != nil {
 		app.serverError(w, err)
 	}
 }
