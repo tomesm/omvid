@@ -20,12 +20,10 @@ func (m *CourseModel) Insert(title, content, expires string) (int, error) {
 	if err != nil {
 		return 0, err
 	}
-
 	id, err := res.LastInsertId()
 	if err != nil {
 		return 0, err
 	}
-
 	return int(id), nil
 }
 
@@ -43,7 +41,6 @@ func (m *CourseModel) Get(id int) (*models.Course, error) {
 	} else if err != nil {
 		return nil, err
 	}
-
 	return c, nil
 }
 
@@ -56,26 +53,20 @@ func (m *CourseModel) Latest() ([]*models.Course, error) {
 	if err != nil {
 		return nil, err
 	}
-
 	defer rows.Close()
-
 	courses := []*models.Course{}
 
 	for rows.Next() {
 		c := &models.Course{}
-
 		err = rows.Scan(&c.ID, &c.Title, &c.Content, &c.Created, &c.Expires)
 		if err != nil {
 			return nil, err
 		}
-
 		courses = append(courses, c)
 	}
-
 	// We can not assume that the iteration was successful!
 	if err = rows.Err(); err != nil {
 		return nil, err
 	}
-
 	return courses, nil
 }

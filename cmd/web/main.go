@@ -32,27 +32,23 @@ func main() {
 	if err != nil {
 		errorLog.Fatal(err)
 	}
-
 	defer db.Close()
 
 	templateCache, err := newTemplateCache("./ui/html/")
 	if err != nil {
 		errorLog.Fatal(err)
 	}
-
 	app := &application{
 		errorLog:      errorLog,
 		infoLog:       infoLog,
 		courses:       &mysql.CourseModel{DB: db},
 		templateCache: templateCache,
 	}
-
 	server := &http.Server{
 		Addr:     *addr,
 		ErrorLog: errorLog,
 		Handler:  app.routes(),
 	}
-
 	infoLog.Printf("Starting server on %s\n", *addr)
 	err = server.ListenAndServe()
 	errorLog.Fatal(err)
@@ -64,10 +60,8 @@ func openDB(dsn string) (*sql.DB, error) {
 	if err != nil {
 		return nil, err
 	}
-
 	if err := db.Ping(); err != nil {
 		return nil, err
 	}
-
 	return db, nil
 }

@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"html/template"
 	"net/http"
 	"strconv"
 
@@ -15,14 +14,11 @@ func (app *application) home(w http.ResponseWriter, r *http.Request) {
 		app.notFound(w)
 		return
 	}
-
 	c, err := app.courses.Latest()
 	if err != nil {
 		app.serverError(w, err)
 	}
-
 	td := &templateData{Courses: c}
-
 	app.render(w, r, "home.page.tmpl", td)
 }
 
@@ -33,7 +29,6 @@ func (app *application) showCourse(w http.ResponseWriter, r *http.Request) {
 		app.notFound(w)
 		return
 	}
-
 	c, err := app.courses.Get(id)
 	if err == models.ErrNoRecord {
 		app.notFound(w)
@@ -42,24 +37,8 @@ func (app *application) showCourse(w http.ResponseWriter, r *http.Request) {
 		app.serverError(w, err)
 		return
 	}
-
-	data := &templateData{Course: c}
-
-	files := []string{
-		"./ui/html/show.page.tmpl",
-		"./ui/html/base.master.tmpl",
-		"./ui/html/footer.partial.tmpl",
-	}
-
-	ts, err := template.ParseFiles(files...)
-	if err != nil {
-		app.serverError(w, err)
-		return
-	}
-
-	if err := ts.Execute(w, data); err != nil {
-		app.serverError(w, err)
-	}
+	td := &templateData{Course: c}
+	app.render(w, r, "show.page.tmpl", td)
 }
 
 // Creates a new course
@@ -69,7 +48,6 @@ func (app *application) createCourse(w http.ResponseWriter, r *http.Request) {
 		app.clientError(w, http.StatusMethodNotAllowed)
 		return
 	}
-
 	// Dummy data
 	title := "Linear algebra"
 	content := "Advanced linear algebra course for computer science"
@@ -79,7 +57,6 @@ func (app *application) createCourse(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		app.serverError(w, err)
 	}
-
 	// Redirect the user to the newly created course record
 	http.Redirect(w, r, fmt.Sprintf("/course?id=%d", id), http.StatusSeeOther)
 }

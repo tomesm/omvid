@@ -5,10 +5,8 @@ import (
 	"errors"
 	"time"
 )
-
 // ErrNoRecord is a database service error informing about no matching records
 var ErrNoRecord = errors.New("models: no matching record found")
-
 // Course struct corresponds to database table
 type Course struct {
 	ID      int
