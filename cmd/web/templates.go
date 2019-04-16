@@ -16,7 +16,10 @@ type templateData struct {
 
 // Return nicely formatted string of time.Time object
 func humanDate(t time.Time) string {
-	return t.Format("02 Jan 2006 at 15:04")
+	if t.IsZero() {
+		return ""
+	}
+	return t.UTC().Format("02 Jan 2006 at 15:04")
 }
 
 var functions = template.FuncMap{
@@ -33,7 +36,6 @@ func newTemplateCache(dir string) (map[string]*template.Template, error) {
 
 	for _, page := range pages {
 		fname := filepath.Base(page)
-		println(page)
 		//Register template.FuncMap
 		ts, err := template.New(fname).Funcs(functions).ParseFiles(page)
 		if err != nil {

@@ -4,7 +4,7 @@ import (
 	"net/http"
 )
 
-func (app *application) routes() *http.ServeMux {
+func (app *application) routes() http.Handler {
 	mux := http.NewServeMux()
 	mux.HandleFunc("/", app.home)
 	mux.HandleFunc("/course", app.showCourse)
@@ -14,5 +14,5 @@ func (app *application) routes() *http.ServeMux {
 	// Register file server to handle URL paths with "/static".
 	// Strip the "/static prefix before the request reachest the file server
 	mux.Handle("/static/", http.StripPrefix("/static", fs))
-	return mux
+	return app.logRequest(secureHeaders(mux))
 }
