@@ -54,7 +54,7 @@ func main() {
 	errorLog.Fatal(err)
 }
 
-// Wrapper funstion for sql.Open() and returns sql.DB connection pool
+// Wrapper function for sql.Open() and returns sql.DB connection pool
 func openDB(dsn string) (*sql.DB, error) {
 	db, err := sql.Open("mysql", dsn)
 	if err != nil {

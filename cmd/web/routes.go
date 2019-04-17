@@ -2,9 +2,12 @@ package main
 
 import (
 	"net/http"
+
+	"github.com/justinas/alice" // Middleware chain lib
 )
 
 func (app *application) routes() http.Handler {
+	middleware := alice.New(app.recoverPanic, app.logRequest, secureHeaders)
 	mux := http.NewServeMux()
 	mux.HandleFunc("/", app.home)
 	mux.HandleFunc("/course", app.showCourse)
@@ -14,5 +17,5 @@ func (app *application) routes() http.Handler {
 	// Register file server to handle URL paths with "/static".
 	// Strip the "/static prefix before the request reachest the file server
 	mux.Handle("/static/", http.StripPrefix("/static", fs))
-	return app.logRequest(secureHeaders(mux))
+	return middleware.Then(mux)
 }

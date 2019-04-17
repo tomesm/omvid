@@ -36,6 +36,7 @@ require (
 	github.com/google/shlex v0.0.0-20181106134648-c34317bd91bf // indirect
 	github.com/josharian/impl v0.0.0-20180228163738-3d0f908298c4 // indirect
 	github.com/jstemmer/gotags v1.4.1 // indirect
+	github.com/justinas/alice v0.0.0-20171023064455-03f45bd4b7da // indirect
 	github.com/keegancsmith/rpc v1.1.0 // indirect
 	github.com/kisielk/errcheck v1.2.0 // indirect
 	github.com/klauspost/asmfmt v1.2.0 // indirect
