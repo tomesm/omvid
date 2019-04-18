@@ -3,19 +3,19 @@ package main
 import (
 	"net/http"
 
+	"github.com/bmizerany/pat"  // REST router
 	"github.com/justinas/alice" // Middleware chain lib
 )
 
 func (app *application) routes() http.Handler {
 	middleware := alice.New(app.recoverPanic, app.logRequest, secureHeaders)
-	mux := http.NewServeMux()
-	mux.HandleFunc("/", app.home)
-	mux.HandleFunc("/course", app.showCourse)
-	mux.HandleFunc("/course/create", app.createCourse)
-	// File Server for serving "./ui/static" directory and it's files.
+	mux := pat.New()
+	mux.Get("/", http.HandlerFunc(app.home))
+	mux.Get("/course/create", http.HandlerFunc(app.createCourseForm))
+	mux.Post("/course/create", http.HandlerFunc(app.createCourse))
+	mux.Get("course/:id", http.HandlerFunc(app.showCourse))
 	fs := http.FileServer(http.Dir("./ui/static/"))
 	// Register file server to handle URL paths with "/static".
-	// Strip the "/static prefix before the request reachest the file server
-	mux.Handle("/static/", http.StripPrefix("/static", fs))
+	mux.Get("/static/", http.StripPrefix("/static", fs))
 	return middleware.Then(mux)
 }

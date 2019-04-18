@@ -5,6 +5,7 @@ require (
 	github.com/StackExchange/wmi v0.0.0-20181212234831-e0a55b97c705 // indirect
 	github.com/alecthomas/gometalinter v3.0.0+incompatible // indirect
 	github.com/alecthomas/units v0.0.0-20151022065526-2efee857e7cf // indirect
+	github.com/bmizerany/pat v0.0.0-20170815010413-6226ea591a40
 	github.com/coreos/etcd v3.3.12+incompatible // indirect
 	github.com/cosiner/argv v0.0.1 // indirect
 	github.com/cpuguy83/go-md2man v1.0.10 // indirect
@@ -36,7 +37,7 @@ require (
 	github.com/google/shlex v0.0.0-20181106134648-c34317bd91bf // indirect
 	github.com/josharian/impl v0.0.0-20180228163738-3d0f908298c4 // indirect
 	github.com/jstemmer/gotags v1.4.1 // indirect
-	github.com/justinas/alice v0.0.0-20171023064455-03f45bd4b7da // indirect
+	github.com/justinas/alice v0.0.0-20171023064455-03f45bd4b7da
 	github.com/keegancsmith/rpc v1.1.0 // indirect
 	github.com/kisielk/errcheck v1.2.0 // indirect
 	github.com/klauspost/asmfmt v1.2.0 // indirect

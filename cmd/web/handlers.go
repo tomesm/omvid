@@ -10,10 +10,6 @@ import (
 
 // Define a home handler function which writes a byte slice containing response body
 func (app *application) home(w http.ResponseWriter, r *http.Request) {
-	if r.URL.Path != "/" {
-		app.notFound(w)
-		return
-	}
 	c, err := app.courses.Latest()
 	if err != nil {
 		app.serverError(w, err)
@@ -24,7 +20,7 @@ func (app *application) home(w http.ResponseWriter, r *http.Request) {
 
 // Displays a particular course based on its ID
 func (app *application) showCourse(w http.ResponseWriter, r *http.Request) {
-	id, err := strconv.Atoi(r.URL.Query().Get("id"))
+	id, err := strconv.Atoi(r.URL.Query().Get(":id"))
 	if err != nil || id < 1 {
 		app.notFound(w)
 		return
@@ -41,15 +37,15 @@ func (app *application) showCourse(w http.ResponseWriter, r *http.Request) {
 	app.render(w, r, "show.page.tmpl", td)
 }
 
+// Handler for creating a form
+func (app *application) createCourseForm(w http.ResponseWriter, r *http.Request) {
+	w.Write([]byte("Create a new course..."))
+}
+
 // Creates a new course
 func (app *application) createCourse(w http.ResponseWriter, r *http.Request) {
-	if r.Method != "POST" {
-		w.Header().Set("Allow", "POST")
-		app.clientError(w, http.StatusMethodNotAllowed)
-		return
-	}
 	// Dummy data
-	title := "Linear algebra"
+	title := "Linear algebra2"
 	content := "Advanced linear algebra course for computer science"
 	expires := "7"
 
@@ -58,5 +54,5 @@ func (app *application) createCourse(w http.ResponseWriter, r *http.Request) {
 		app.serverError(w, err)
 	}
 	// Redirect the user to the newly created course record
-	http.Redirect(w, r, fmt.Sprintf("/course?id=%d", id), http.StatusSeeOther)
+	http.Redirect(w, r, fmt.Sprintf("/course/%d", id), http.StatusSeeOther)
 }
