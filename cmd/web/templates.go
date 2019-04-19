@@ -41,8 +41,8 @@ func newTemplateCache(dir string) (map[string]*template.Template, error) {
 		if err != nil {
 			return nil, err
 		}
-		// Add all layout/master templates
-		ts, err = ts.ParseGlob(filepath.Join(dir, "*.master.tmpl"))
+		// Add all layout/layout templates
+		ts, err = ts.ParseGlob(filepath.Join(dir, "*.layout.tmpl"))
 		if err != nil {
 			return nil, err
 		}

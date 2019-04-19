@@ -26,6 +26,15 @@ func (app *application) notFound(w http.ResponseWriter) {
 	app.clientError(w, http.StatusNotFound)
 }
 
+// addDefaultData adds the current year to the CurrentYear filed
+func (app *application) addDefaultData(td *templateData, r *http.Request) *templateData {
+	if td == nil {
+		td = &templateData{}
+	}
+	td.CurrentYear = time.Now().Year()
+	return td
+}
+
 // render templates from the cache
 func (app *application) render(w http.ResponseWriter, r *http.Request, name string, td *templateData) {
 	ts, ok := app.templateCache[name]
@@ -35,18 +44,9 @@ func (app *application) render(w http.ResponseWriter, r *http.Request, name stri
 	}
 	// Let execute tepmplates to buffer first and catch possible error without sending html
 	buf := new(bytes.Buffer)
-	if err := ts.Execute(buf, td); err != nil {
+	if err := ts.Execute(buf, app.addDefaultData(td, r)); err != nil {
 		app.serverError(w, err)
 		return
 	}
 	buf.WriteTo(w)
-}
-
-// addDefaultData adds the current year to the CurrentYear filed
-func (app *application) addDefaultData(td *templateData, r *http.Request) *templateData {
-	if td == nil {
-		td = &templateData{}
-	}
-	td.CurrentYear = time.Now().Year()
-	return td
 }
