@@ -68,16 +68,16 @@ require (
 	github.com/spf13/jwalterweatherman v1.1.0 // indirect
 	github.com/spf13/viper v1.3.2 // indirect
 	github.com/stamblerre/gocode v0.0.0-20190327203809-810592086997 // indirect
-	github.com/stretchr/testify v1.3.0 // indirect
+	github.com/stretchr/objx v0.2.0 // indirect
 	github.com/ugorji/go/codec v0.0.0-20190320090025-2dc34c0b8780 // indirect
 	github.com/zmb3/gogetdoc v0.0.0-20190228002656-b37376c5da6a // indirect
 	golang.org/x/arch v0.0.0-20190312162104-788fe5ffcd8c // indirect
-	golang.org/x/crypto v0.0.0-20190325154230-a5d413f7728c // indirect
+	golang.org/x/crypto v0.0.0-20190417174047-f416ebab96af // indirect
 	golang.org/x/lint v0.0.0-20190313153728-d0100b6bd8b3 // indirect
-	golang.org/x/net v0.0.0-20190328230028-74de082e2cca // indirect
+	golang.org/x/net v0.0.0-20190415214537-1da14a5a36f2 // indirect
 	golang.org/x/sync v0.0.0-20190227155943-e225da77a7e6 // indirect
-	golang.org/x/sys v0.0.0-20190402142545-baf5eb976a8c // indirect
-	golang.org/x/tools v0.0.0-20190402200628-202502a5a924 // indirect
+	golang.org/x/sys v0.0.0-20190416152802-12500544f89f // indirect
+	golang.org/x/tools v0.0.0-20190417223002-a5870b403859 // indirect
 	gopkg.in/alecthomas/kingpin.v3-unstable v3.0.0-20180810215634-df19058c872c // indirect
 	honnef.co/go/tools v0.0.0-20190319011948-d116c56a00f3 // indirect
 	mvdan.cc/unparam v0.0.0-20190310220240-1b9ccfa71afe // indirect

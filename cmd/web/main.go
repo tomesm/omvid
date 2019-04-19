@@ -63,6 +63,5 @@ func openDB(dsn string) (*sql.DB, error) {
 	if err := db.Ping(); err != nil {
 		return nil, err
 	}
-	println("cokol")
 	return db, nil
 }

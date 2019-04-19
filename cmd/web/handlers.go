@@ -39,7 +39,8 @@ func (app *application) showCourse(w http.ResponseWriter, r *http.Request) {
 
 // Handler for creating a form
 func (app *application) createCourseForm(w http.ResponseWriter, r *http.Request) {
-	w.Write([]byte("Create a new course..."))
+	app.render(w, r, "create.page.tmpl", nil)
+
 }
 
 // Creates a new course
