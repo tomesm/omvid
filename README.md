@@ -11,10 +11,11 @@ This project has just started (April 2019) and it is still under development :) 
 
 | Method  | Pattern  | Handler  | Action  |
 |---|---|---|---|
-| ANY | /  | home  | Display the home page  |
-| ANY | /course  | showCourse  | Display a specific course  |
+| GET | /  | home  | Display the home page  |
+| GET | /course/:id  | showCourse  | Display a specific course  |
+| GET | /course/crate  | createCourseForm  | Display the new course form  |
 | POST | /course/create  | createCourse  | Create a new course  |
-| ANY	| /static/ | http.FileServer | Serve a specific static file
+| GET	| /static/ | http.FileServer | Serve a specific static file
 
 ## Project structure
 
