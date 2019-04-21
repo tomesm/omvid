@@ -13,7 +13,7 @@ This project has just started (April 2019) and it is still under development :) 
 |---|---|---|---|
 | GET | /  | home  | Display the home page  |
 | GET | /course/:id  | showCourse  | Display a specific course  |
-| GET | /course/crate  | createCourseForm  | Display the new course form  |
+| GET | /course/create  | createCourseForm  | Display the new course form  |
 | POST | /course/create  | createCourse  | Create a new course  |
 | GET	| /static/ | http.FileServer | Serve a specific static file
 
