@@ -5,6 +5,7 @@ import (
 	"path/filepath"
 	"time"
 
+	"github.com/tomesm/virtd/pkg/forms"
 	"github.com/tomesm/virtd/pkg/models"
 )
 
@@ -12,6 +13,7 @@ type templateData struct {
 	CurrentYear int
 	Course      *models.Course
 	Courses     []*models.Course
+	Form        *forms.Form
 }
 
 // Return nicely formatted string of time.Time object
