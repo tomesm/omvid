@@ -45,14 +45,19 @@ func (app *application) createCourseForm(w http.ResponseWriter, r *http.Request)
 
 // Creates a new course
 func (app *application) createCourse(w http.ResponseWriter, r *http.Request) {
-	// Dummy data
-	title := "Linear algebra2"
-	content := "Advanced linear algebra course for computer science"
-	expires := "7"
+	if err := r.ParseForm(); err != nil {
+		app.clientError(w, http.StatusBadRequest)
+		return
+	}
+
+	title := r.PostForm.Get("title")
+	content := r.PostForm.Get("content")
+	expires := r.PostForm.Get("expires")
 
 	id, err := app.courses.Insert(title, content, expires)
 	if err != nil {
 		app.serverError(w, err)
+		return
 	}
 	// Redirect the user to the newly created course record
 	http.Redirect(w, r, fmt.Sprintf("/course/%d", id), http.StatusSeeOther)

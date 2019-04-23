@@ -9,7 +9,7 @@ require (
 	github.com/coreos/etcd v3.3.12+incompatible // indirect
 	github.com/cosiner/argv v0.0.1 // indirect
 	github.com/cpuguy83/go-md2man v1.0.10 // indirect
-	github.com/davidrjenni/reftools v0.0.0-20180914123528-654d0ba4f96d // indirect
+	github.com/davidrjenni/reftools v0.0.0-20190411195930-981bbac422f8 // indirect
 	github.com/fatih/color v1.7.0 // indirect
 	github.com/fatih/gomodifytags v0.0.0-20180914191908-141225bf62b6 // indirect
 	github.com/fatih/motion v0.0.0-20180408211639-218875ebe238 // indirect
@@ -72,14 +72,14 @@ require (
 	github.com/ugorji/go/codec v0.0.0-20190320090025-2dc34c0b8780 // indirect
 	github.com/zmb3/gogetdoc v0.0.0-20190228002656-b37376c5da6a // indirect
 	golang.org/x/arch v0.0.0-20190312162104-788fe5ffcd8c // indirect
-	golang.org/x/crypto v0.0.0-20190417174047-f416ebab96af // indirect
-	golang.org/x/lint v0.0.0-20190313153728-d0100b6bd8b3 // indirect
-	golang.org/x/net v0.0.0-20190415214537-1da14a5a36f2 // indirect
+	golang.org/x/crypto v0.0.0-20190418165655-df01cb2cc480 // indirect
+	golang.org/x/lint v0.0.0-20190409202823-959b441ac422 // indirect
+	golang.org/x/net v0.0.0-20190420063019-afa5a82059c6 // indirect
 	golang.org/x/sync v0.0.0-20190227155943-e225da77a7e6 // indirect
-	golang.org/x/sys v0.0.0-20190416152802-12500544f89f // indirect
-	golang.org/x/tools v0.0.0-20190417223002-a5870b403859 // indirect
+	golang.org/x/sys v0.0.0-20190419153524-e8e3143a4f4a // indirect
+	golang.org/x/tools v0.0.0-20190420181800-aa740d480789 // indirect
 	gopkg.in/alecthomas/kingpin.v3-unstable v3.0.0-20180810215634-df19058c872c // indirect
-	honnef.co/go/tools v0.0.0-20190319011948-d116c56a00f3 // indirect
+	honnef.co/go/tools v0.0.0-20190418001031-e561f6794a2a // indirect
 	mvdan.cc/unparam v0.0.0-20190310220240-1b9ccfa71afe // indirect
 	sourcegraph.com/sqs/pbtypes v1.0.0 // indirect
 )
