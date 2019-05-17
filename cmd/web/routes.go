@@ -8,15 +8,18 @@ import (
 )
 
 func (app *application) routes() http.Handler {
-	middleware := alice.New(app.recoverPanic, app.logRequest, secureHeaders)
-	mux := pat.New()
-	mux.Get("/", http.HandlerFunc(app.home))
-	mux.Get("/course/create", http.HandlerFunc(app.createCourseForm))
-	mux.Post("/course/create", http.HandlerFunc(app.createCourse))
-	mux.Get("/course/:id", http.HandlerFunc(app.showCourse))
+	standardMiddleware := alice.New(app.recoverPanic, app.logRequest, secureHeaders)
+	dynamicMiddleware := alice.New(app.session.Enable)
 
+	mux := pat.New()
+	mux.Get("/", dynamicMiddleware.ThenFunc(app.home))
+	mux.Get("/course/create", dynamicMiddleware.ThenFunc(app.createCourseForm))
+	mux.Post("/course/create", dynamicMiddleware.ThenFunc(app.createCourse))
+	mux.Get("/course/:id", dynamicMiddleware.ThenFunc(app.showCourse))
+
+	// Static files do not need middleware
 	fs := http.FileServer(http.Dir("./ui/static/"))
 	// Register file server to handle URL paths with "/static".
 	mux.Get("/static/", http.StripPrefix("/static", fs))
-	return middleware.Then(mux)
+	return standardMiddleware.Then(mux)
 }
