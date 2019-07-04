@@ -34,7 +34,9 @@ func (app *application) showCourse(w http.ResponseWriter, r *http.Request) {
 		app.serverError(w, err)
 		return
 	}
-	td := &templateData{Course: c}
+	td := &templateData{
+		Course: c,
+	}
 	app.render(w, r, "show.page.tmpl", td)
 }
 
@@ -64,6 +66,7 @@ func (app *application) createCourse(w http.ResponseWriter, r *http.Request) {
 		app.serverError(w, err)
 		return
 	}
+	app.session.Put(r, "flash", "Course successfully created!")
 	// Redirect the user to the newly created course record
 	http.Redirect(w, r, fmt.Sprintf("/course/%d", id), http.StatusSeeOther)
 }

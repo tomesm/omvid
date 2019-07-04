@@ -14,6 +14,7 @@ type templateData struct {
 	Course      *models.Course
 	Courses     []*models.Course
 	Form        *forms.Form
+	Flash       string
 }
 
 // Return nicely formatted string of time.Time object
